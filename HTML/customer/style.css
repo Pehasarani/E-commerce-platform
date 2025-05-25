@@ -1,0 +1,171 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #FF6F00;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo img {
+    width: 50px;
+    height: auto;
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-search input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+}
+
+.navbar-search button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.navbar-icons i {
+    font-size: 24px;
+    color: white;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Payment Section */
+.payment-container {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+.payment-container h1 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.payment-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Left Column (Supplier Details) */
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    width: 100%;
+}
+
+.form-group input:focus {
+    border-color: #FF6F00;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 111, 0, 0.5);
+}
+
+/* Right Column (Payment Methods) */
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-column h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.payment-method {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.payment-method i {
+    margin-right: 15px;
+    color: #333;
+}
+
+/* Pay Button */
+.pay-btn {
+    background-color: #FF6F00;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pay-btn:hover {
+    background-color: #ff4b00;
+}
+
+/* Back Link */
+.back-link {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.back-link i {
+    font-size: 20px;
+}
+
+.back-link:hover {
+    color: #FF6F00;
+}

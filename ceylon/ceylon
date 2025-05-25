@@ -1,0 +1,167 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               8.0.34 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.5.0.6677
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Dumping database structure for ceylon
+CREATE DATABASE IF NOT EXISTS `ceylon` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `ceylon`;
+
+-- Dumping structure for table ceylon.cart
+CREATE TABLE IF NOT EXISTS `cart` (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `qty` int DEFAULT NULL,
+  `total_cost` double DEFAULT NULL,
+  `product_product_id` int NOT NULL,
+  `cus_payment_payment_id` int NOT NULL,
+  PRIMARY KEY (`cart_id`),
+  KEY `fk_cart_product1_idx` (`product_product_id`),
+  KEY `fk_cart_cus_payment1_idx` (`cus_payment_payment_id`),
+  CONSTRAINT `fk_cart_cus_payment1` FOREIGN KEY (`cus_payment_payment_id`) REFERENCES `cus_payment` (`payment_id`),
+  CONSTRAINT `fk_cart_product1` FOREIGN KEY (`product_product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.cart: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.customer
+CREATE TABLE IF NOT EXISTS `customer` (
+  `cus_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `nic` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `dob` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  `postal_code` int DEFAULT NULL,
+  PRIMARY KEY (`cus_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.customer: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.cus_payment
+CREATE TABLE IF NOT EXISTS `cus_payment` (
+  `payment_id` int NOT NULL AUTO_INCREMENT,
+  `status` int DEFAULT NULL,
+  `amounr` double DEFAULT NULL,
+  `payment_date` datetime DEFAULT NULL,
+  `invoice_invoice_id` int NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  KEY `fk_cus_payment_invoice1_idx` (`invoice_invoice_id`),
+  CONSTRAINT `fk_cus_payment_invoice1` FOREIGN KEY (`invoice_invoice_id`) REFERENCES `invoice` (`invoice_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.cus_payment: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.invoice
+CREATE TABLE IF NOT EXISTS `invoice` (
+  `invoice_id` int NOT NULL AUTO_INCREMENT,
+  `amount` double DEFAULT NULL,
+  `invoice_date` datetime DEFAULT NULL,
+  `customer_cus_id` int NOT NULL,
+  PRIMARY KEY (`invoice_id`),
+  KEY `fk_invoice_customer1_idx` (`customer_cus_id`),
+  CONSTRAINT `fk_invoice_customer1` FOREIGN KEY (`customer_cus_id`) REFERENCES `customer` (`cus_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.invoice: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.phone_number
+CREATE TABLE IF NOT EXISTS `phone_number` (
+  `id` int NOT NULL,
+  `customer_cus_id` int NOT NULL,
+  `Phone_number` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_phone_number_customer_idx` (`customer_cus_id`),
+  CONSTRAINT `fk_phone_number_customer` FOREIGN KEY (`customer_cus_id`) REFERENCES `customer` (`cus_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.phone_number: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.phone_number_supplier
+CREATE TABLE IF NOT EXISTS `phone_number_supplier` (
+  `id` int NOT NULL,
+  `Phone_number` int NOT NULL,
+  `supplier_supplier_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_phone_number_supplier_supplier1_idx` (`supplier_supplier_id`),
+  CONSTRAINT `fk_phone_number_supplier_supplier1` FOREIGN KEY (`supplier_supplier_id`) REFERENCES `supplier` (`supplier_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.phone_number_supplier: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.product
+CREATE TABLE IF NOT EXISTS `product` (
+  `product_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `description` text,
+  `weight` int DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `no_of_products` int DEFAULT NULL,
+  `supplier_supplier_id` int NOT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `fk_product_supplier1_idx` (`supplier_supplier_id`),
+  CONSTRAINT `fk_product_supplier1` FOREIGN KEY (`supplier_supplier_id`) REFERENCES `supplier` (`supplier_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.product: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.product_has_customer
+CREATE TABLE IF NOT EXISTS `product_has_customer` (
+  `product_product_id` int NOT NULL,
+  `customer_cus_id` int NOT NULL,
+  PRIMARY KEY (`product_product_id`,`customer_cus_id`),
+  KEY `fk_product_has_customer_customer1_idx` (`customer_cus_id`),
+  KEY `fk_product_has_customer_product1_idx` (`product_product_id`),
+  CONSTRAINT `fk_product_has_customer_customer1` FOREIGN KEY (`customer_cus_id`) REFERENCES `customer` (`cus_id`),
+  CONSTRAINT `fk_product_has_customer_product1` FOREIGN KEY (`product_product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.product_has_customer: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.supplier
+CREATE TABLE IF NOT EXISTS `supplier` (
+  `supplier_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `business_email` varchar(45) DEFAULT NULL,
+  `business_name` varchar(45) DEFAULT NULL,
+  `business_registration_code` varchar(45) DEFAULT NULL,
+  `card_no` varchar(45) DEFAULT NULL,
+  `card_name` varchar(45) DEFAULT NULL,
+  `security_code` varchar(45) DEFAULT NULL,
+  `exp_date` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`supplier_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.supplier: ~0 rows (approximately)
+
+-- Dumping structure for table ceylon.supplier_payment
+CREATE TABLE IF NOT EXISTS `supplier_payment` (
+  `payment_id` int NOT NULL AUTO_INCREMENT,
+  `amount` double DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `payment_date` datetime DEFAULT NULL,
+  `supplier_supplier_id` int NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  KEY `fk_supplier_payment_supplier1_idx` (`supplier_supplier_id`),
+  CONSTRAINT `fk_supplier_payment_supplier1` FOREIGN KEY (`supplier_supplier_id`) REFERENCES `supplier` (`supplier_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- Dumping data for table ceylon.supplier_payment: ~0 rows (approximately)
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

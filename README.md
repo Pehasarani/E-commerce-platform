@@ -2,6 +2,7 @@
 Ceylon Cart is a convenient and secure e-commerce platform that connects sellers and buyers. After a simple registration process, users can easily list products, browse a wide range of items, and complete purchases in just a few steps.
 
 Users can easily login
+
 ![image](https://github.com/user-attachments/assets/af5a5c5b-3cd3-473e-8e9c-9396010c5e4c)
 
 Customers will be directed to the customer dashboard right after registering, where they can search and buy products
